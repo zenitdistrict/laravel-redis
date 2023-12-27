@@ -19,5 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/items', [UrlController::class, 'index']);
+Route::get('/items', [UrlController::class, 'index'])->name('url.index');
 //Route::get('/create', [UrlController::class, 'createUrl']);

@@ -1,28 +1,28 @@
-copy .env file from .env.example:
+copy app/.env file from app/.env.example:
 ```
-cp .env.example .env
+cp app/.env.example app/.env
 ```
-fill MYSQL fields in .env file
+fill database fields (DB_) in .env file
 
 run docker containers:
 ```
 docker-compose up -d
 ```
-install yii framework:
+install laravel framework:
 ```
 docker-compose run composer install
 ```
-create database as named in MYSQL_DATABASE
+create database as named in DB_DATABASE
 
 run migrations:
 ```
-docker exec -ti "$(docker ps -aqf ancestor=nanoninja/php-fpm:8.1)" php yii migrate/up
+docker exec -ti "$(docker ps -aqf ancestor=nanoninja/php-fpm:8.1)" php artisan migrate
 ```
-run currency parser (add it to cron job to run every day):
+run url seeder:
 ```
-docker exec -ti "$(docker ps -aqf ancestor=nanoninja/php-fpm:8.1)" php yii currency/parse
+docker exec -ti "$(docker ps -aqf ancestor=nanoninja/php-fpm:8.1)" php artisan db:seed
 ```
-go to homepage:
+get items list:
 ```
-http://localhost:8000/
+http://localhost:8000/api/items
 ```

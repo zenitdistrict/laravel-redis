@@ -10,11 +10,4 @@ use Illuminate\Support\Facades\Redis;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
-
-    public function index()
-    {
-
-        $test = Redis::set('test', 'test111');
-        return 'conte' . env('REDIS_PASSWORD');
-    }
 }

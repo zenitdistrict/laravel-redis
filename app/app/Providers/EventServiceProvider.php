@@ -20,6 +20,7 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        // TODO: add events for update/delete Url
         UrlCreated::class => [
             UrlCreatedListener::class
         ]

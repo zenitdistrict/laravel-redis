@@ -3,15 +3,14 @@
 namespace App\Listeners;
 
 use App\Events\UrlCreated;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Services\UrlCacheService;
 
 class UrlCreatedListener
 {
     /**
      * Create the event listener.
      */
-    public function __construct()
+    public function __construct(private readonly UrlCacheService $cacheService)
     {
         //
     }
@@ -21,7 +20,7 @@ class UrlCreatedListener
      */
     public function handle(UrlCreated $event): void
     {
-        echo ('URL CREATED !!!!!!!!!');
-        //
+        // TODO: check that new Url is on the first page
+        $this->cacheService->updateFirstPage();
     }
 }

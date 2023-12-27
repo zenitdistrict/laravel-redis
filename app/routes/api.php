@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/items', [UrlController::class, 'index']);
-Route::get('/create', [UrlController::class, 'createUrl']);
+//Route::get('/create', [UrlController::class, 'createUrl']);

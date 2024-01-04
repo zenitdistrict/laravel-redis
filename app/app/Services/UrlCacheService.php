@@ -7,23 +7,20 @@ use Illuminate\Support\Facades\Cache;
 
 class UrlCacheService
 {
+    private $cacheKey = 'page.1';
+
     public function getFirstPage()
     {
-        if ($cache = Cache::get('page.1')) {
-            return $cache;
-        }
-
-        $urls = $this->getFirstPageFromDB();
-        Cache::put('page.1', $urls, 60);
-
-        return $urls;
+        return Cache::remember($this->cacheKey, now()->addMinutes(10), function () {
+            return $this->getFirstPageFromDB();
+        });
     }
 
     public function updateFirstPage()
     {
         $urls = $this->getFirstPageFromDB();
-        Cache::delete('page.1');
-        Cache::put('page.1', $urls, 60);
+        Cache::delete($this->cacheKey);
+        Cache::put($this->cacheKey, $urls, now()->addMinutes(10));
     }
 
     // TODO: move to UrlService(for example) to work with DB

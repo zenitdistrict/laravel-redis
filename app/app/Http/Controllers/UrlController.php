@@ -16,7 +16,7 @@ class UrlController extends BaseController
 
     public function index(UrlCacheService $cacheService, Request $request)
     {
-        if (!$request->input('page') || $request->input('page') == 1) {
+        if ($request->input('page', 1) == 1) {
             return $cacheService->getFirstPage();
         }
 
